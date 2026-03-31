@@ -1,0 +1,99 @@
+button[type=submit], input[type=button], input[type=reset], input[type=submit], .btn {
+  padding: 2rem 3rem;
+  font-weight: 800;
+  border-radius: 0;
+  font-size: rem(16px);
+  height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $green-1;
+  color: $black;
+  @include media-breakpoint-down(sm) {
+    padding: .7rem 1.5rem;
+    font-size: rem(17px);
+    font-weight: 500;
+  }
+  &--more{
+    padding: 2rem 1rem;
+  }
+  &.get-tickets{
+    padding: 1.8rem 2.8rem;
+    margin-right: 1.2rem;
+  }
+}
+
+.more-link {
+  position: relative;
+  color: $green;
+
+  &:after {
+    content: " ";
+    display: inline-block;
+    width: 3px;
+    height: 8px;
+    background-image: url(../images/icon/icon-more.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin-left: 7px;
+  }
+
+  &:before {
+    position: absolute;
+    content: "";
+    width: calc(100% - 10px);
+    height: 1px;
+    border-radius: 1px;
+    left: 0;
+    top: 80%;
+    background-color: var(--base-link-color);
+    -webkit-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    transform: translateX(-100%);
+    -webkit-transition: -webkit-transform .4s;
+    -o-transition: transform .4s;
+    transition: transform .4s;
+    transition: transform .4s, -webkit-transform .4s;
+  }
+
+  &:hover {
+    text-decoration: underline;
+    color: $green;
+  }
+}
+
+
+.block-anchor {
+  &:hover {
+    .link-cards__wrapper {
+      -webkit-transform: scale(1.02);
+      transform: scale(1.02);
+      -webkit-transition: .3s ease-in-out;
+      transition: .3s ease-in-out;
+      background-color: $blue-300;
+    }
+
+
+    .arrow {
+      &__icon {
+        display: inline-block;
+        transform: translateX(5px);
+        transition: 0.3s ease-in-out;
+
+      }
+    }
+
+    &:hover {
+      .arrow {
+        &__icon {
+          transform: translateX(13px);
+        }
+      }
+    }
+  }
+}
+
+button:focus{
+  outline: none;
+}

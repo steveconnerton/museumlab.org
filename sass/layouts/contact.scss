@@ -1,0 +1,66 @@
+
+.form-section .form-control,
+.form-section .frm_form_field,
+.form-section h2 {
+  margin-bottom: 24px;
+}
+
+input[type=date],
+input[type=email],
+input[type=number],
+input[type=password],
+input[type=search],
+input[type=tel],
+input[type=text],
+input[type=url] {
+  font-size: 30px !important;
+  border-radius: 0;
+  color: $black;
+  padding: 4px 20px 8px;
+
+  max-width: 100%;
+  width: 100%;
+  line-height: 1.2;
+}
+
+input[type=date],
+input[type=email],
+input[type=file],
+input[type=number],
+input[type=password],
+input[type=search],
+input[type=tel],
+input[type=text],
+input[type=url],
+textarea {
+  background-color: $white;
+  border-width: 0 0 2px;
+  outline: 0;
+  font-weight: 400;
+}
+
+textarea {
+  resize: none;
+  vertical-align: top;
+  width: 100%;
+  height: 280px;
+  padding: 20px;
+
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-radius: 2px;
+  background: $white;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+button[type=submit], input[type=button], input[type=reset], input[type=submit] {
+
+  cursor: pointer;
+  text-align: center;
+  -webkit-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+  font-style: normal;
+}
+

@@ -1,0 +1,133 @@
+.two-columns {
+  padding: 0;
+
+  .container {
+    background-color: $white;
+    color: $black;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    @include media-breakpoint-up(md) {
+      max-width: 974px;
+    }
+    a:not(.btn){
+      color:#369436;
+    }
+  }
+
+  h1, h2, h3, h4, h5, p {
+    color: inherit;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  &__heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
+    width: 30%;
+    padding-left: 2rem;
+    @include media-breakpoint-down(md) {
+      width: 100%;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding-left: 0;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    width: 100%;
+    @include media-breakpoint-down(sm) {
+      flex-direction: column;
+    }
+
+    h2 {
+
+    }
+
+
+    .text-description {
+      width: 65%;
+      max-width: 65%;
+      margin-left: 35px;
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: -.2px;
+      line-height: 23px;
+      padding-top: 8px;
+      @include media-breakpoint-down(sm) {
+        width: 100%;
+        margin-left: 0;
+        max-width: 100%
+      }
+
+      h3 {
+        font-size: $h4-font-size;
+      }
+
+      ul {
+        li {
+          margin-bottom: 12px;
+        }
+      }
+
+      .btn-holder {
+        margin: 2.5rem 0;
+      }
+
+      figure {
+        max-width: 100%;
+
+        figcaption {
+          font-size: 12px;
+          margin-top: 10px;
+        }
+
+        img {
+          max-width: 100%;
+          height: auto;
+        }
+      }
+
+      .images {
+        img {
+          height: 100%;
+          width: 100%;
+          object-fit: contain;
+        }
+
+        .image {
+          height: 100%;
+
+          &-wrapper {
+            height: 220px;
+
+          }
+        }
+
+        h4 {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  &.map-download {
+    .btn-holder {
+      margin-top: 0;
+    }
+
+  }
+}
+
+

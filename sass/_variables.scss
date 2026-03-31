@@ -1,0 +1,271 @@
+// Override Bootstrap default variables here
+// Do not edit any of the files in /vendor/bootstrap/scss/!
+
+// Color Variables
+// Bootstrap Color Overrides
+
+
+// CMP SSD fonts
+@font-face {
+  font-family: 'CMPSharpSansDispBlack';
+  src: url('../fonts/CMP-black/CMPSharpSansDispBlack.eot');
+  src: url('../fonts/CMP-black/CMPSharpSansDispBlack.eot') format('embedded-opentype'),
+  url('../fonts/CMP-black/CMPSharpSansDispBlack.woff2') format('woff2'),
+  url('../fonts/CMP-black/CMPSharpSansDispBlack.woff') format('woff'),
+  url('../fonts/CMP-black/CMPSharpSansDispBlack.ttf') format('truetype'),
+  url('../fonts/CMP-black/CMPSharpSansDispBlack.svg#CMPSharpSansDispBlack') format('svg');
+}
+
+@font-face {
+  font-family: 'CMPSharpSansDispBold';
+  src: url('../fonts/CMP-bold/CMPSharpSansDispBold.eot');
+  src: url('../fonts/CMP-bold/CMPSharpSansDispBold.eot') format('embedded-opentype'),
+  url('../fonts/CMP-bold/CMPSharpSansDispBold.woff2') format('woff2'),
+  url('../fonts/CMP-bold/CMPSharpSansDispBold.woff') format('woff'),
+  url('../fonts/CMP-bold/CMPSharpSansDispBold.ttf') format('truetype'),
+  url('../fonts/CMP-bold/CMPSharpSansDispBold.svg#CMPSharpSansDispBold') format('svg');
+}
+
+@font-face {
+  font-family: 'CMPSharpSansDispBook';
+  src: url('../fonts/CMP-book/CMPSharpSansDispBook.eot');
+  src: url('../fonts/CMP-book/CMPSharpSansDispBook.eot') format('embedded-opentype'),
+  url('../fonts/CMP-book/CMPSharpSansDispBook.woff2') format('woff2'),
+  url('../fonts/CMP-book/CMPSharpSansDispBook.woff') format('woff'),
+  url('../fonts/CMP-book/CMPSharpSansDispBook.ttf') format('truetype'),
+  url('../fonts/CMP-book/CMPSharpSansDispBook.svg#CMPSharpSansDispBook') format('svg');
+}
+
+@font-face {
+  font-family: 'CMPSharpSansDispLight';
+  src: url('../fonts/CMP-light/CMPSharpSansDispLight.eot');
+  src: url('../fonts/CMP-light/CMPSharpSansDispLight.eot') format('embedded-opentype'),
+  url('../fonts/CMP-light/CMPSharpSansDispLight.woff2') format('woff2'),
+  url('../fonts/CMP-light/CMPSharpSansDispLight.woff') format('woff'),
+  url('../fonts/CMP-light/CMPSharpSansDispLight.ttf') format('truetype'),
+  url('../fonts/CMP-light/CMPSharpSansDispLight.svg#CMPSharpSansDispLight') format('svg');
+}
+
+@font-face {
+  font-family: 'CMPSharpSansDispThin';
+  src: url('../fonts/CMP-thin/CMPSharpSansDispThin.eot');
+  src: url('../fonts/CMP-thin/CMPSharpSansDispThin.eot') format('embedded-opentype'),
+  url('../fonts/CMP-thin/CMPSharpSansDispThin.woff2') format('woff2'),
+  url('../fonts/CMP-thin/CMPSharpSansDispThin.woff') format('woff'),
+  url('../fonts/CMP-thin/CMPSharpSansDispThin.ttf') format('truetype'),
+  url('../fonts/CMP-thin/CMPSharpSansDispThin.svg#CMPSharpSansDispThin') format('svg');
+}
+
+@font-face {
+  font-family: 'CMPSharpSansDispMed';
+  src: url('../fonts/CMP-med/CMPSharpSansDisp-Medium.eot');
+  src: url('../fonts/CMP-med/CMPSharpSansDisp-Medium.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/CMP-med/CMPSharpSansDisp-Medium.woff2') format('woff2'),
+  url('../fonts/CMP-med/CMPSharpSansDisp-Medium.woff') format('woff'),
+  url('../fonts/CMP-med/CMPSharpSansDisp-Medium.ttf') format('truetype'),
+  url('../fonts/CMP-med/CMPSharpSansDisp-Medium.svg#CMPSharpSansDisp-Medium') format('svg');
+}
+
+// Gotham fonts
+@font-face {
+  font-family: 'GothamSSmBlack_Web';
+  src: url('../fonts/Gotham-black/GothamSSmBlack_Web.eot');
+  src: url('../fonts/Gotham-black/GothamSSmBlack_Web.eot') format('embedded-opentype'),
+  url('../fonts/Gotham-black/GothamSSmBlack_Web.woff2') format('woff2'),
+  url('../fonts/Gotham-black/GothamSSmBlack_Web.woff') format('woff'),
+  url('../fonts/Gotham-black/GothamSSmBlack_Web.ttf') format('truetype'),
+  url('../fonts/Gotham-black/GothamSSmBlack_Web.svg#GothamSSmBlack_Web') format('svg');
+}
+
+@font-face {
+  font-family: 'GothamSSmBold_Web';
+  src: url('../fonts/Gotham-bold/GothamSSmBold_Web.eot');
+  src: url('../fonts/Gotham-bold/GothamSSmBold_Web.eot') format('embedded-opentype'),
+  url('../fonts/Gotham-bold/GothamSSmBold_Web.woff2') format('woff2'),
+  url('../fonts/Gotham-bold/GothamSSmBold_Web.woff') format('woff'),
+  url('../fonts/Gotham-bold/GothamSSmBold_Web.ttf') format('truetype'),
+  url('../fonts/Gotham-bold/GothamSSmBold_Web.svg#GothamSSmBold_Web') format('svg');
+}
+
+@font-face {
+  font-family: 'GothamSSmBook_Web';
+  src: url('../fonts/Gotham-book/GothamSSmBook_Web.eot');
+  src: url('../fonts/Gotham-book/GothamSSmBook_Web.eot') format('embedded-opentype'),
+  url('../fonts/Gotham-book/GothamSSmBook_Web.woff2') format('woff2'),
+  url('../fonts/Gotham-book/GothamSSmBook_Web.woff') format('woff'),
+  url('../fonts/Gotham-book/GothamSSmBook_Web.ttf') format('truetype'),
+  url('../fonts/Gotham-book/GothamSSmBook_Web.svg#GothamSSmBook_Web') format('svg');
+}
+
+@font-face {
+  font-family: 'GothamSSmLight_Web';
+  src: url('../fonts/Gotham-light/GothamSSmLight_Web.eot');
+  src: url('../fonts/Gotham-light/GothamSSmLight_Web.eot') format('embedded-opentype'),
+  url('../fonts/Gotham-light/GothamSSmLight_Web.woff2') format('woff2'),
+  url('../fonts/Gotham-light/GothamSSmLight_Web.woff') format('woff'),
+  url('../fonts/Gotham-light/GothamSSmLight_Web.ttf') format('truetype'),
+  url('../fonts/Gotham-light/GothamSSmLight_Web.svg#GothamSSmLight_Web') format('svg');
+}
+
+@font-face {
+  font-family: 'GothamSSmXLight_Web';
+  src: url('../fonts/Gotham-xlight/GothamSSmXLight_Web.eot');
+  src: url('../fonts/Gotham-xlight/GothamSSmXLight_Web.eot') format('embedded-opentype'),
+  url('../fonts/Gotham-xlight/GothamSSmXLight_Web.woff2') format('woff2'),
+  url('../fonts/Gotham-xlight/GothamSSmXLight_Web.woff') format('woff'),
+  url('../fonts/Gotham-xlight/GothamSSmXLight_Web.ttf') format('truetype'),
+  url('../fonts/Gotham-xlight/GothamSSmXLight_Web.svg#GothamSSmXLight_Web') format('svg');
+}
+
+@font-face {
+  font-family: 'GothamSSmMedium_Web';
+  src: url('../fonts/Gotham-med/GothamSSmMedium_Web.eot');
+  src: url('../fonts/Gotham-med/GothamSSmMedium_Web.eot') format('embedded-opentype'),
+  url('../fonts/Gotham-med/GothamSSmMedium_Web.woff2') format('woff2'),
+  url('../fonts/Gotham-med/GothamSSmMedium_Web.woff') format('woff'),
+  url('../fonts/Gotham-med/GothamSSmMedium_Web.ttf') format('truetype'),
+  url('../fonts/Gotham-med/GothamSSmMedium_Web.svg#GothamSSmMedium_Web') format('svg');
+}
+
+
+/*================ Fonts Family ====================*/
+$cmp-ssd-font: 'CMPSharpSansDispBook';
+$cmp-ssd-black-font: 'CMPSharpSansDispBlack';
+$cmp-ssd-bold-font: 'CMPSharpSansDispBold';
+$cmp-ssd-light-font: 'CMPSharpSansDispLight';
+$cmp-ssd-thin-font: 'CMPSharpSansDispThin';
+$cmp-ssd-med-font: 'CMPSharpSansDispMed';
+
+$gotham-font: 'GothamSSmBook_Web';
+$gotham-black-font: 'GothamSSmBlack_Web';
+$gotham-bold-font: 'GothamSSmBold_Web';
+$gotham-light-font: 'GothamSSmLight_Web';
+$gotham-xlight-font: 'GothamSSmXLight_Web';
+$gotham-med-font: 'GothamSSmMedium_Web';
+
+$font-Awesome: "Font Awesome 5 Pro";
+
+$white: #fff !default;
+$gray-100: #f8f9fc !default;
+$gray-150: #F3F5F7 !default;
+$gray-200: #eaecf4 !default;
+$gray-300: #dddfeb !default;
+$gray-400: #d1d3e2 !default;
+$gray-500: #b7b9cc !default;
+$gray-600: #858796 !default;
+$gray-700: #6e707e !default;
+$gray-800: #5a5c69 !default;
+$gray-900: #3a3b45 !default;
+$black: #000000 !default;
+$gray: #FCFBF7 !default;
+
+
+$primary: #004380 !default;
+
+$blue-dark: #385177;
+$blue-light: #7FABC5;
+$blue: $blue-light;
+$blue-100: #00BCF8;
+$blue-250: #97C2DC;
+$blue-200: #65A2DC;
+$blue-300: #F0F7FC;
+$sidebar-blue: #303045 !default;
+$indigo: #a409ba !default;
+$purple: #7B58A7 !default;
+$pink: #e83e8c !default;
+$red: #e74a3b !default;
+$orange: #ff7b62 !default;
+$yellow: #fab826 !default;
+$yellow-light: #FFD97D !default;
+$yellow-dark: #d89c0b !default;
+$gold: #BEA450;
+$green: #18FA14 !default;
+$green-1: #27dd23 !default;
+$green-2: #369436 !default;
+$green-100: #7AAE3A;
+$success: $green;
+
+$white: #ffffff;
+$white--light: #d4dde6;
+$black--light: #6c889a;
+
+// BACKGROUNDS
+$background--dark: #0a141a;
+$background--light: #eaf0f5;
+
+// OTHERS
+$border--dark: #1e3949;
+$black-100: #434A52;
+$black-200: #8D8D8D;
+$black-300: #526071;
+$black-400: #070707;
+
+// Set Contrast Threshold
+$yiq-contrasted-threshold: 195 !default;
+
+// Typography
+$body-color: $white !default;
+$container-max-width: 1400px;
+
+$font-family-sans-serif: $gotham-med-font !default;
+$headings-font-family: $cmp-ssd-bold-font !default;
+$headings-color: $blue-light !default;
+$font-weight-light: 400 !default;
+$font-weight-base: 400;
+$headings-font-weight: 400 !default;
+$font-weight-bolder: 600 !default;
+
+// Shadows
+$box-shadow-sm: 0 0.125rem 0.25rem 0 rgba($gray-900, .2) !default;
+$box-shadow: 0 0.15rem 1.75rem 0 rgba($gray-900, .15) !default;
+// $box-shadow-lg: 0 1rem 3rem rgba($black, .175) !default;
+
+// Borders Radius
+$border-radius: 0.35rem !default;
+$border-color: $gray-400;
+
+// Spacing Variables
+// Change below variable if the height of the navbar changes
+$topbar-base-height: 4.375rem;
+// Change below variable to change the width of the sidenav
+$sidebar-base-width: 14rem;
+// Change below variable to change the width of the sidenav when collapsed
+$sidebar-collapsed-width: 6.5rem;
+
+// Card
+$card-cap-bg: $gray-100;
+$card-border-color: $border-color;
+
+// Adjust column spacing for symmetry
+$spacer: 1rem;
+$grid-gutter-width: $spacer * 1.5;
+
+// Transitions
+$transition-collapse: height .15s ease !default;
+
+// Dropdowns
+$dropdown-font-size: 0.85rem;
+$dropdown-border-color: $border-color;
+$h1-font-large:6.25rem;
+$h1-font-size: 4.8rem;
+$h2-font-size: 2.5rem;
+$h3-font-size: 3.437rem;
+$h4-font-size: 1.85rem;
+$h5-font-size: 1.56rem;
+$h6-font-size: 1rem;
+
+//Button
+$btn-padding-y: 1rem;
+$btn-padding-x: 1.5rem;
+
+// Small devices (landscape phones, 576px and up)
+$smscreen-size: 576px;
+// Medium devices (tablets, 768px and up)
+$mdscreen-size: 768px;
+// landscape iPad view
+$lsipad-screen-size: 1024px;
+// Large devices (desktops, 992px and up)
+$lgscreen-size: 992px;
+// Extra large devices (large desktops, 1200px and up)
+$xlscreen-size: 1200px;
+

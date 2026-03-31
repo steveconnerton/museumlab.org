@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1448" height="1465" viewBox="0 0 1448 1465">
+  <defs>
+    <rect id="rect-1" width="1440" height="1457" x="4" y="2" rx="0" ry="0"/>
+    <filter id="filter-2" width="200%" height="200%" x="-50%" y="-50%" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feOffset dx="0" dy="2" in="SourceAlpha" result="shadow-1-feOffset-shadow"/>
+      <feGaussianBlur in="shadow-1-feOffset-shadow" result="shadow-1-feGaussianBlur-shadow" stdDeviation="2.41"/>
+      <feColorMatrix in="shadow-1-feGaussianBlur-shadow" result="shadow-1-feColorMatrix-shadow" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.1014805506993007 0"/>
+    </filter>
+    <rect id="rect-3" width="1439" height="1448" x="4" y="2" rx="0" ry="0"/>
+    <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="userSpaceOnUse">
+      <rect width="1448" height="1465" x="0" y="0" fill="black"/>
+      <use fill="white" xlink:href="#rect-3"/>
+    </mask>
+    <mask id="mask-12" maskContentUnits="userSpaceOnUse" maskUnits="userSpaceOnUse">
+      <rect width="1448" height="1465" x="0" y="0" fill="black"/>
+      <use fill="white" xlink:href="#undefined"/>
+    </mask>
+    <mask id="mask-13" maskContentUnits="userSpaceOnUse" maskUnits="userSpaceOnUse">
+      <rect width="1448" height="1465" x="0" y="0" fill="black"/>
+      <use fill="white" xlink:href="#undefined"/>
+    </mask>
+  </defs>
+  <g>
+    <g>
+      <use fill="black" stroke="black" stroke-opacity="0" stroke-width="0" filter="url(#filter-2)" xlink:href="#rect-1"/>
+      <use fill="rgb(0,0,0)" xlink:href="#rect-1"/>
+    </g>
+    <g>
+      <g>
+        <use fill="none" xlink:href="#rect-3"/>
+        <g mask="url(#mask-4)">
+          <g opacity=".202">
+            <path fill="none" stroke="rgb(255,255,255)" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1" d="M3.54619226 947.9400749h463.44194757V484.49812735H3.54619226v463.44194757z"/>
+            <g>
+              <path fill="none" stroke="rgb(255,255,255)" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1" d="M3.65435746 1202.27904108c0 127.74990806 103.61945495 231.31494858 231.43648449 231.31494858s231.43648449-103.56504052 231.43648449-231.31494858S362.90787149 970.9640925 235.09084195 970.9640925 3.65435745 1074.52913302 3.65435745 1202.27904108"/>
+              <path fill="none" stroke="rgb(255,255,255)" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1" d="M3.65435746 234.31566031c0 127.74990807 103.61945495 231.31494858 231.43648449 231.31494858s231.43648449-103.56504051 231.43648449-231.31494858c0-127.74990806-103.61945495-231.31494857-231.43648449-231.31494857S3.65435745 106.56575225 3.65435745 234.3156603"/>
+              <path fill="none" stroke="rgb(255,255,255)" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1" d="M487.89069424 949.6119434H1435V486.98204625H487.89069424V949.6119434z"/>
+              <path fill="rgb(255,255,255)" fill-rule="evenodd" d="M1435 1433.59398966V970.9640925H972.12703102L1435 1433.59398966z"/>
+              <path fill="rgb(255,255,255)" fill-rule="evenodd" d="M972.12703102 3.00071174v227.80607874c0 129.69295363 105.18610192 234.82381841 234.94719793 234.82381841H1435V237.82453015c0-129.69295363-105.18610192-234.82381841-234.94719793-234.82381841H972.12703102z"/>
+              <path fill="rgb(255,255,255)" fill-rule="evenodd" d="M950.76366322 970.9640925H722.83789217c-129.76109601 0-234.94719793 105.13086479-234.94719793 234.82381841v227.80607875h227.92577105c129.76109601 0 234.94719793-105.13086479 234.94719793-234.82381842V970.9640925z"/>
+            </g>
+          </g>
+          <g mask="url(#mask-12)"/>
+        </g>
+      </g>
+      <g mask="url(#mask-13)"/>
+    </g>
+  </g>
+</svg>

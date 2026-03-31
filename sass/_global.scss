@@ -1,0 +1,264 @@
+// Global component styles
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  height: 100%;
+  margin: 0 auto;
+  zoom: .9;
+  background-color: $black;
+}
+
+a:not(.btn){
+  color:$green-2;
+  &:hover{
+    text-decoration: underline;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+section {
+  padding: 2rem 0;
+}
+
+a.block-anchor {
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+// Main page wrapper
+.site-wrapper {
+  min-height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+
+  .content-wrapper {
+    width: 100%;
+  }
+}
+
+.main-container {
+  box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .15);
+  border: 1px solid #e3e6f0;
+  padding: 2rem 0;
+}
+
+.narrow-container {
+  width: 66%;
+  margin: 0 auto;
+  @include media-breakpoint-down(md) {
+    width: 90%;
+  }
+}
+
+.container-fluid {
+  max-width: 1400px;
+}
+
+// Set container padding to match gutter width instead of default 15px
+.container,
+.container-fluid {
+  padding-left: $grid-gutter-width;
+  padding-right: $grid-gutter-width;
+}
+
+.section-content {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+
+  &.py-6 {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+}
+
+.container {
+  //max-width: 1228px;
+  max-width: 1400px;
+}
+
+// Scroll to top button
+.scroll-to-top {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  display: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  text-align: center;
+  color: $white;
+  background: fade-out($gray-800, .5);
+  line-height: 46px;
+
+  &:focus,
+  &:hover {
+    color: white;
+  }
+
+  &:hover {
+    background: $gray-800;
+  }
+
+  i {
+    font-weight: 800;
+  }
+}
+
+.border-dark {
+  border: 2px solid $background--dark !important;
+}
+
+figure {
+  margin-bottom: .5rem;
+}
+
+.text-center {
+  figure {
+    margin: 0 auto;
+    margin-bottom: 1rem;
+
+    figcaption {
+      font-size: rem(12px);
+      text-align: right;
+      color: $gray-700;
+    }
+  }
+
+}
+.rc,
+.responsive-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 30px;
+  height: 0;
+  overflow: hidden;
+
+  object,
+  embed,
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+
+
+.align-content-f-start {
+  align-items: start !important;
+}
+
+img.size-full {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  width: 100%;
+}
+
+address {
+  margin-left: 1rem;
+}
+
+.header,
+.footer {
+  .container {
+    max-width: $container-max-width;
+    @include media-breakpoint-down(sm) {
+      padding: 0 1rem;
+    }
+  }
+}
+
+figure.alignright,
+img.alignright {
+  float: right;
+  margin: 0 0 1em 1em;
+  @include media-breakpoint-down(sm) {
+    float: none;
+    margin: 1rem auto;
+    display: block;
+  }
+}
+
+figure {
+  figcaption {
+    font-size: rem(12px);
+    text-align: right;
+    color: $gray-700;
+    line-height: 1.5;
+  }
+}
+figure.alignleft,
+img.alignleft,
+{
+  float: left;
+  margin: 0 1em 1em 0;
+  @include media-breakpoint-down(sm) {
+    float: none;
+    margin: 1rem auto;
+    display: block;
+  }
+}
+
+img.aligncenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+
+a img.alignright {
+  float: right;
+  margin: 0 0 1em 1em;
+  @include media-breakpoint-down(sm) {
+    float: none;
+    margin: 1rem auto;
+    display: block;
+  }
+}
+
+a img.alignleft {
+  float: left;
+  margin: 0 1em 1em 0;
+  @include media-breakpoint-down(sm) {
+    float: none;
+    margin: 1rem auto;
+    display: block;
+  }
+}
+
+a img.aligncenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  @include media-breakpoint-down(sm) {
+    float: none;
+    margin: 1rem auto;
+    display: block;
+  }
+}
+
+.switcher .option a:hover {
+  color: #666666;
+}
+.switcher .selected a:hover{
+  color: #666666;
+}

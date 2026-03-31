@@ -1,0 +1,211 @@
+// Background Gradient Utilities
+
+@each $color, $value in $theme-colors {
+  .bg-gradient-#{$color} {
+    background-color: $value;
+    background-image: linear-gradient(180deg, $value 10%, darken($value, 15%) 100%);
+    background-size: cover;
+  }
+}
+
+// Grayscale Background Utilities
+
+@each $level, $value in $grays {
+  .bg-gray-#{$level} {
+    background-color: $value !important;
+  }
+}
+
+
+.bg-gray {
+  background-color: $gray !important
+}
+
+.bg-purple {
+  background-color: $purple !important;
+}
+
+.bg-blue-light {
+  background-color: $blue-light !important;
+}
+
+.bg-blue {
+  background: $blue-light;
+}
+
+
+.bg-dark {
+  background-color: $primary !important;
+}
+
+.bg-green {
+  background-color: $green !important;
+}
+
+.bg-light-green {
+  background: $blue-300
+}
+
+.bg-gray-dark {
+  background-color: $black-100;
+
+  p {
+    color: $white;
+  }
+}
+
+.bg-watermark {
+
+  .container {
+
+    position: relative;
+    background-image: url('../images/flame.jpg');
+    padding: 0;
+    background-repeat: no-repeat;
+    background-position: right center;
+    max-width: 1024px;
+    margin: 0 auto;
+    background-size: 85%;
+
+    @include media-breakpoint-up(sm) {
+      background-size: 41%;
+    }
+
+    &:after {
+      content: '';
+      height: 100%;
+      width: 100%;
+      background-color: $white;
+      opacity: .8;
+      position: absolute;
+      top: 0
+    }
+
+    .general-content {
+      position: relative;
+      z-index: 2;
+      font-size: 1rem;
+      padding: 0 1rem;
+
+      p {
+        font-size: inherit;
+      }
+
+    }
+  }
+
+  ul li {
+    strong {
+      color: $gold;
+    }
+  }
+
+  ul.list {
+    padding-left: rem(40px);
+
+    li {
+
+      &:before {
+        background-image: none;
+      }
+    }
+  }
+
+  .list-inline {
+    padding-left: rem(40px);
+
+    @include media-breakpoint-down(sm) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    li {
+      position: relative;
+      margin-bottom: .5rem;
+      display: inline-block;
+      margin: 10px 25px;
+
+      &:before {
+        content: "";
+        background-color: $blue;
+        height: 8px;
+        width: 8px;
+        left: -12px;
+        top: 10px;
+        position: absolute;
+      }
+    }
+  }
+}
+
+.solid-shadow {
+  position: relative;
+
+  &:before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 20px;
+    height: 80%;
+    top: 10%;
+    right: -20px;
+    background-color: $green;
+  }
+
+  &--bottom {
+    &:before {
+      width: 80%;
+      height: 20px;
+      top: auto;
+      bottom: -20px;
+      right: 10%;
+    }
+  }
+}
+
+.background {
+  &-position {
+    &-left {
+
+      background-size: contain;
+      background-position: left;
+      background-repeat: no-repeat;
+      position: relative;
+      background-color: rgba(127, 171, 197, 0.66);
+      min-height: rem(412px);
+      display: flex;
+      align-items: center;
+      @include media-breakpoint-down(sm) {
+        background-size: cover;
+
+      }
+
+      .general-content {
+        z-index: 9999;
+
+        position: relative;
+
+      }
+
+      p {
+        color: $white;
+        font-size: rem(19px);
+      }
+
+      &:after {
+        position: absolute;
+        content: "";
+        background: linear-gradient(270deg, #ABC8D9 -1.62%, rgba(178, 205, 220, 0) 108.29%);
+        width: 39%;
+        height: 100%;
+        top: 0;
+        @include media-breakpoint-down(md) {
+          width: 83%;
+        }
+        @include media-breakpoint-down(sm) {
+          width: 100%;
+          background: linear-gradient(270deg, #abc8d9 -1.62%, rgba(178, 205, 220, 0.5) 72.29%);
+        }
+      }
+    }
+  }
+}

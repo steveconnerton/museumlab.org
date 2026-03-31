@@ -1,0 +1,44 @@
+
+ul.list-none {
+  list-style: none;
+  li{
+    margin-bottom: .6rem;
+  }
+}
+
+ul.list {
+  list-style: none;
+
+
+  li {
+    position: relative;
+    margin-bottom: .5rem;
+    /*
+    &:before {
+      content: "";
+      background-image: url(../images/icon/check-mark.png);
+      height: 16px;
+      width: 16px;
+      left: -25px;
+      top: 10px;
+      position: absolute;
+    }*/
+    list-style-image: url("../images/icon/check-mark.png");
+    list-style-position: outside;
+
+  }
+}
+
+ol {
+  li {
+    margin-bottom: .5rem;
+  }
+}
+
+.no-list {
+  list-style: none;
+
+  li {
+    margin-bottom: .8rem;
+  }
+}

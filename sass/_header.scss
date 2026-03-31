@@ -1,0 +1,48 @@
+
+.header {
+  background-color: $black;
+  width: 100%;
+  margin-bottom: 3rem;
+  padding-top: 2rem;
+  @include media-breakpoint-down(sm) {
+    padding-bottom: .5rem;
+  }
+
+  &__menu {
+
+    .navbar-nav {
+      justify-content: flex-end;
+      width: 100%;
+      margin-bottom: .8rem;
+      padding: 56px;
+    }
+  }
+
+  &__logo {
+    h1 {
+      line-height: 0;
+      margin-bottom: 0;
+    }
+  }
+
+}
+
+.home {
+  .header {
+    margin-bottom: 0;
+    @include media-breakpoint-up(lg) {
+      position: absolute;
+      background: rgba(0, 0, 0, .5);
+      z-index: 9;
+      padding-bottom: 5px;
+      padding-top: 5px;
+    }
+  }
+}
+
+
+.content-wrapper {
+  @include media-breakpoint-down(sm) {
+
+  }
+}

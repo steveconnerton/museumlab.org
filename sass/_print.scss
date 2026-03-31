@@ -1,0 +1,128 @@
+/**
+print
+ */
+#section-to-print {
+
+  visibility: hidden;
+  display: none;
+  .text-33 {
+    font-size: 35px !important;
+  }
+
+  &.single-recipe {
+    p {
+      font-size: 18pt;
+      line-height: 1.5;
+    }
+    .recipe {
+      &__subtitle {
+        font-size: 17pt;
+      }
+
+      &__credit {
+        font-size: 15pt;
+      }
+
+      &__direction {
+
+      }
+
+    }
+
+    ul.list li {
+      font-size: 17pt;
+    }
+  }
+}
+
+.col-print-1 {
+  width: 8%;
+  float: left;
+}
+
+.col-print-2 {
+  width: 16%;
+  float: left;
+}
+
+.col-print-3 {
+  width: 25%;
+  float: left;
+}
+
+.col-print-4 {
+  width: 33%;
+  float: left;
+}
+
+.col-print-5 {
+  width: 42%;
+  float: left;
+}
+
+.col-print-6 {
+  width: 50%;
+  float: left;
+}
+
+.col-print-7 {
+  width: 58%;
+  float: left;
+}
+
+.col-print-8 {
+  width: 66%;
+  float: left;
+}
+
+.col-print-9 {
+  width: 75%;
+  float: left;
+}
+
+.col-print-10 {
+  width: 83%;
+  float: left;
+}
+
+.col-print-11 {
+  width: 92%;
+  float: left;
+}
+
+.col-print-12 {
+  width: 100%;
+  float: left;
+}
+
+@media print {
+
+  body * {
+    visibility: hidden;
+  }
+  header, footer, .cta, .no-print {
+    display: none;
+  }
+  #section-to-print {
+    display: block;
+
+    .list {
+      padding-left: 1.5rem;
+      margin-left: 1rem;
+
+      li {
+        list-style-image: url("../images/icon/check-mark.png");
+        list-style-position: outside;
+
+      }
+    }
+  }
+  #section-to-print, #section-to-print * {
+    visibility: visible;
+  }
+  #section-to-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}

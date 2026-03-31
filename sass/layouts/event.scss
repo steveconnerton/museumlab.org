@@ -1,0 +1,54 @@
+.event {
+  &__image {
+    position: relative;
+    display: block;
+    &:after{
+      background: linear-gradient(0,rgba(0,0,0,.6) 30%,rgba(0,0,0,.1) 55%);
+      left: 0;
+      right: 0;
+      content: '';
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      z-index: 1;
+      top:0;
+
+    }
+
+  }
+
+  &__detail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 2;
+  }
+
+  &__dates {
+    background-color: $green;
+    display: flex;
+    flex-direction: row;
+    color: $black;
+    padding: 15px 15px;
+    border-radius: 0 6px 0 0;
+    width: 120px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__title {
+    color: $white;
+    padding: 4px;
+    text-transform: lowercase;
+  }
+}
+.tribe-events-single-event-description{
+  p{
+    color: $black;
+  }
+}

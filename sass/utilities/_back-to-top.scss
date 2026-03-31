@@ -1,0 +1,25 @@
+.back-to-top {
+
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  display: none;
+
+
+  &__inner{
+    padding: 5px 3px;
+    background: $black-100;
+    color: $white;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    opacity: .8;
+    &:hover{
+      opacity: 1;
+    }
+  }
+}

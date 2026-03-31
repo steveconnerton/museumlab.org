@@ -1,0 +1,8 @@
+:root {
+   --tec-font-family-sans-serif:"Trade Gothic Next LT Cond", "Arial", "Helvetica Neue", "Helvetica", sans-serif;
+ /* --tec-color-text-events-title:#ffffff;
+  --tec-color-text-primary:#ffffff;
+  --tec-color-text-secondary:#ffffff;
+  --tec-color-text-view-selector-list-item:#000000;*/
+  --tec-color-background-events:#ffffff;
+}

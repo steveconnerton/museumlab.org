@@ -1,0 +1,105 @@
+/**
+footer
+ */
+.footer {
+  background-color: $black;
+  border-top: 1px solid $gray-200;
+  padding: 1.5rem 0;
+
+  &__top {
+    padding-bottom: 2rem;
+  }
+
+  &-nav {
+    display: flex;
+    padding-right: 10rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-direction: column;
+    @include media-breakpoint-up(sm) {
+      flex-direction: row;
+    }
+
+    li {
+      margin: 0;
+      flex: 0 0 100%;
+      max-width: 100%;
+
+      @include media-breakpoint-up(sm) {
+        margin-bottom: 1rem;
+        flex: 0 0 48.33%;
+        max-width: 48.33%;
+      }
+
+      a {
+        font-size: 17px;
+      }
+    }
+
+  }
+
+  &__copyright {
+    p {
+      font-size: rem(13px);
+      margin-bottom: 0;
+      font-family: $gotham-font;
+      a{
+        margin-left: 2rem;
+        @include media-breakpoint-down(sm) {
+          display: block;
+          margin-left: 0;
+        }
+      }
+    }
+  }
+
+  a {
+    color: $white;
+  }
+
+  &__logos {
+    margin: 2rem 0;
+
+    img {
+      height: 79px
+    }
+  }
+
+  &__social {
+
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    a {
+      height: 35px;
+      width: 35px;
+      display: block;
+      font-size: rem(16px);
+      padding: 0 12px;
+      color: $white;
+      border: 1px solid $white;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+
+      &:hover {
+        color: $white;
+        text-decoration: none;
+      }
+    }
+
+    @include media-breakpoint-down(sm) {
+      order: 2;
+      text-align: center;
+    }
+  }
+}
+
+.ezra_branding,
+.ezra_branding a {
+  font-size: rem(13px);
+  color: $black-100;
+}

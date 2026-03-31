@@ -1,0 +1,143 @@
+.section-slider {
+  @include media-breakpoint-down(md) {
+    padding-bottom: 0;
+  }
+  .container{
+    @include media-breakpoint-down(md) {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+
+
+  &:first-child {
+    padding-top: 8rem;
+  }
+
+  &:last-child {
+    padding-top: 8rem;
+  }
+
+  .slick-list {
+    overflow: visible;
+    max-width: 975px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .slick-slide {
+    margin-right: 45px;
+    margin-left: 45px;
+    @include media-breakpoint-down(md) {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    img {
+      width: 100%;
+      max-width: 974px;
+      height: 700px;
+      -o-object-fit: cover;
+      object-fit: cover;
+      -o-object-position: center;
+      object-position: center;
+      @include media-breakpoint-down(md) {
+        height: 35vh;
+        min-height: 230px;
+      }
+    }
+  }
+
+  .slick-next,
+  .slick-prev {
+    width: 2.2rem;
+    height: 2.2rem;
+    top: 47%;
+    z-index: 10;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    -webkit-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+
+    &:hover {
+      opacity: .85;
+    }
+
+    &.slick-disabled {
+      cursor: default;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  .slick-prev {
+    left: 7.5rem;
+    background-image: url(../images/icon/icon-slider-arrow-active-prev.svg);
+
+    &.slick-disabled {
+      background-image: url(../images/icon/icon-slider-arrow-prev.svg);
+    }
+  }
+
+  .slick-next {
+    right: 7.5rem;
+    background-image: url(../images/icon/icon-slider-arrow-active.svg);
+
+    &.slick-disabled {
+      background-image: url(../images/icon/icon-slider-arrow.svg);
+    }
+  }
+
+  .slick-dots li button::before,
+  .slick-next::before,
+  .slick-prev::before {
+    content: none;
+  }
+
+  .slick-dots {
+    bottom: -30px;
+    height: 30px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    @include media-breakpoint-down(md) {
+      bottom: -12px;
+    }
+
+    li {
+      width: auto;
+      height: auto;
+      display: block;
+
+      button {
+        padding: 0;
+        width: 10px;
+        height: 10px;
+        border: 2px solid $white;
+        border-radius: 50%;
+      }
+
+      &.active {
+        button {
+          background-color: $white;
+        }
+      }
+    }
+  }
+}

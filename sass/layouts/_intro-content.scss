@@ -1,0 +1,48 @@
+.intro-content {
+  padding: 1.5rem 0;
+
+  h1 {
+    font-size: 100px;
+    margin-bottom: 2.5rem;
+    line-height: .9;
+    @include media-breakpoint-down(md) {
+      font-size: 40px;
+    }
+  }
+
+  h2 {
+    font-size: 40px;
+    margin-bottom: 1.5rem;
+    @include media-breakpoint-up(md) {
+      width: 75%;
+    }
+    @include media-breakpoint-down(md) {
+      font-size: 24px;
+      line-height: rem(27px);
+    }
+  }
+
+  .btn {
+    margin-bottom: 1rem;
+  }
+
+  .more-link {
+    margin-bottom: 1.5rem;
+    display: inline-block;
+  }
+
+  .pdf-list {
+    p {
+      margin-bottom: 5px;
+    }
+
+    img {
+      margin-right: 10px;
+    }
+
+    a {
+      color: $green;
+      text-decoration: underline;
+    }
+  }
+}

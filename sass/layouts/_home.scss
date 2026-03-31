@@ -1,0 +1,30 @@
+.home {
+  &-shapes {
+    .event-cards {
+      background-image: url(../images/shapes_1.svg);
+    }
+
+    .three-column-shaped-images-with-link {
+      background-image: url(../images/shapes_2.svg);
+    }
+
+    .instagram-widget {
+      background-image: url(../images/shapes_3.svg);
+    }
+    .event-cards,
+    .three-column-shaped-images-with-link,
+    .instagram-widget {
+      background-size: contain;
+      background-position: center;
+      background-repeat: repeat-x;
+      @include media-breakpoint-down(lg) {
+        background-image:none;
+      }
+    }
+  }
+
+  .banner-video {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}

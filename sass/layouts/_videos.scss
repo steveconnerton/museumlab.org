@@ -1,0 +1,42 @@
+.section-videos {
+  h2 {
+
+  }
+
+  .video-holder {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .video {
+      max-width: calc((100% - 20px) / 3);
+      margin-top: 20px;
+      position: relative;
+      display: none;
+
+      &.visible {
+        display: block;
+      }
+
+      @include media-breakpoint-down(sm) {
+        max-width: 100%;
+      }
+
+      &:after {
+        content: " ";
+        display: block;
+        width: 48px;
+        height: 69px;
+        background-image: url(../images/icon/video-btn.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+}
