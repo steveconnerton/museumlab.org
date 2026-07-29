@@ -1,80 +1,133 @@
 <?php
-$class = isset( $args['class'] ) ? $args['class'] : '';
+/**
+ * Template Part: Event Cards (Homepage - Dynamic, Unique & Fixed Images)
+ */
 
-// Explicitly pass Season 13 (FY26 General Admission)
-$season_id = 13; 
-$query_string = 'productionSeasonId=' . $season_id;
+$class           = isset( $args['class'] ) ? $args['class'] : '';
+$placeholder_img = get_stylesheet_directory_uri() . '/assets/images/placeholder.jpg';
 
-// 2. Call WPGetAPI endpoint
-$response = function_exists( 'wpgetapi_endpoint' ) 
-    ? wpgetapi_endpoint( 'tessitura', 'perf_summary', array( 'query_variables' => $query_string ) ) 
-    : array();
+// Dynamic transient key for daily cache refresh
+$transient_key = 'mlab_homepage_events_' . date( 'Y_m_d' );
+$events        = get_transient( $transient_key );
 
-$performances = array();
-if ( is_array( $response ) ) {
-    if ( isset( $response['PerformanceSummary'] ) ) {
-        $performances = $response['PerformanceSummary'];
-    } elseif ( isset( $response['PerformanceSummaries'] ) ) {
-        $performances = $response['PerformanceSummaries'];
-    } else {
-        $performances = $response;
-    }
-}
+if ( false === $events || empty( $events ) ) {
+    $events    = array();
+    $today_iso = date( 'Y-m-d' );
 
-if ( isset( $performances['Id'] ) ) {
-    $performances = array( $performances );
-}
+    // 1. Fetch marketing image/title overrides from web_contents
+    $web_overrides = array();
+    if ( function_exists( 'wpgetapi_endpoint' ) ) {
+        $raw_contents = wpgetapi_endpoint( 'tessitura', 'web_contents', array() );
+        if ( is_array( $raw_contents ) ) {
+            foreach ( $raw_contents as $group ) {
+                $p_id = isset( $group['RequestedOwner']['ElementId'] ) ? (string) $group['RequestedOwner']['ElementId'] : '';
+                if ( ! $p_id || empty( $group['WebContents'] ) ) continue;
 
-$unique_events = array();
-$now           = time();
+                foreach ( $group['WebContents'] as $content ) {
+                    $desc = isset( $content['Type']['Description'] ) ? $content['Type']['Description'] : '';
+                    $val  = isset( $content['Value'] ) ? trim( $content['Value'] ) : '';
 
-if ( ! empty( $performances ) && is_array( $performances ) ) {
-    foreach ( $performances as $perf ) {
-        if ( ! is_array( $perf ) ) continue;
+                    if ( ! $val ) continue;
 
-        $id         = isset( $perf['Id'] ) ? $perf['Id'] : '';
-        $date       = isset( $perf['PerformanceDateTime'] ) ? $perf['PerformanceDateTime'] : '';
-        $base_title = isset( $perf['Description'] ) ? $perf['Description'] : '';
-
-        if ( ! $id ) continue;
-
-        // Verify status & web contents
-        if ( function_exists( 'mlab_is_performance_on_sale' ) && ! mlab_is_performance_on_sale( $id ) ) {
-            continue;
+                    if ( false !== strpos( $desc, 'Title Override' ) ) {
+                        $web_overrides[$p_id]['title'] = $val;
+                    }
+                    if ( false !== strpos( $desc, 'Image URL' ) ) {
+                        $web_overrides[$p_id]['image'] = $val;
+                    }
+                }
+            }
         }
+    }
 
-        $web_contents = function_exists( 'mlab_get_web_contents' ) ? mlab_get_web_contents( $id ) : array();
-        $final_title  = ! empty( $web_contents['title_override'] ) ? $web_contents['title_override'] : $base_title;
-        $image_url    = ! empty( $web_contents['image'] ) ? $web_contents['image'] : '';
+    // 2. Active Schedule mapped with explicit fallback images
+    $upcoming_schedule = array(
+        array(
+            'perf_id' => '3319',
+            'prod_id' => '2792',
+            'title'   => 'Workshop: Polymer Clay',
+            'date'    => '2026-07-31',
+            'image'   => 'https://pittsburghkids.org/wp-content/uploads/2025/08/Bookbinding.jpg',
+        ),
+        array(
+            'perf_id' => '3362',
+            'prod_id' => '2792',
+            'title'   => 'Workshop: Pewter Casting',
+            'date'    => '2026-08-07',
+            'image'   => 'https://pittsburghkids.org/wp-content/uploads/2025/09/TNEW-MuseumLab-Workshop.jpg',
+        ),
+        array(
+            'perf_id' => '3367',
+            'prod_id' => '2792',
+            'title'   => 'Workshop: Wood Carving',
+            'date'    => '2026-08-14',
+            'image'   => 'https://pittsburghkids.org/wp-content/uploads/2025/09/TNEW-MuseumLab-Workshop.jpg',
+        ),
+        array(
+            'perf_id' => '3372',
+            'prod_id' => '2792',
+            'title'   => 'Workshop: Wax Seals',
+            'date'    => '2026-08-21',
+            'image'   => 'https://pittsburghkids.org/wp-content/uploads/2025/09/TNEW-MuseumLab-Workshop.jpg',
+        ),
+        array(
+            'perf_id' => '3377',
+            'prod_id' => '2792',
+            'title'   => 'Workshop: Bookbinding',
+            'date'    => '2026-08-29',
+            'image'   => 'https://pittsburghkids.org/wp-content/uploads/2025/08/Bookbinding.jpg',
+        ),
+    );
 
-        if ( $date && strtotime( $date ) >= $now && ! isset( $unique_events[ $final_title ] ) ) {
-            $unique_events[ $final_title ] = array(
-                'id'    => $id,
-                'title' => $final_title,
-                'date'  => $date,
-                'image' => $image_url,
+    // 3. Filter strictly for future dates AND deduplicate
+    $seen_titles = array();
+
+    foreach ( $upcoming_schedule as $item ) {
+        if ( strtotime( $item['date'] ) >= strtotime( $today_iso ) ) {
+            $title_clean = strtolower( trim( $item['title'] ) );
+
+            if ( isset( $seen_titles[ $title_clean ] ) ) {
+                continue;
+            }
+
+            $pid   = $item['perf_id'];
+            $title = ! empty( $web_overrides[$pid]['title'] ) ? $web_overrides[$pid]['title'] : $item['title'];
+
+            // Priority: API override > explicit schedule image > placeholder
+            $image = ! empty( $web_overrides[$pid]['image'] ) ? $web_overrides[$pid]['image'] : ( ! empty( $item['image'] ) ? $item['image'] : $placeholder_img );
+
+            $events[] = array(
+                'id'        => $pid,
+                'title'     => $title,
+                'image'     => $image,
+                'date_text' => date( 'M j', strtotime( $item['date'] ) ),
+                'timestamp' => strtotime( $item['date'] ),
+                'link'      => 'https://secure.pittsburghkids.org/' . esc_attr( $item['prod_id'] ) . '/' . esc_attr( $pid ),
             );
-        }
 
-        if ( count( $unique_events ) >= 2 ) break;
+            $seen_titles[ $title_clean ] = true;
+
+            if ( count( $events ) >= 2 ) {
+                break;
+            }
+        }
     }
+
+    // Cache until midnight tonight
+    $seconds_until_midnight = strtotime( 'tomorrow' ) - time();
+    set_transient( $transient_key, $events, $seconds_until_midnight );
 }
 ?>
 
-<?php if ( ! empty( $unique_events ) ) : ?>
-  <?php foreach ( $unique_events as $event ) : 
-      $display_month = date( 'M', strtotime( $event['date'] ) );
-      $display_day   = date( 'j', strtotime( $event['date'] ) );
-      $link          = "https://secure.pittsburghkids.org/0/" . $event['id'] . "/?site=mlab";
-      $img_url       = ! empty( $event['image'] ) ? $event['image'] : get_stylesheet_directory_uri() . '/assets/images/placeholder.jpg';
-  ?>
+<?php if ( ! empty( $events ) ) : ?>
+  <?php foreach ( $events as $event ) : ?>
     <div class="<?php echo esc_attr( $class ); ?>">
       <div class="event">
-        <a href="<?php echo esc_url( $link ); ?>" class="event__image">
-          <img src="<?php echo esc_url( $img_url ); ?>" alt="<?php echo esc_attr( $event['title'] ); ?>">
+        <a href="<?php echo esc_url( $event['link'] ); ?>" class="event__image">
+          <img src="<?php echo esc_url( $event['image'] ); ?>" alt="<?php echo esc_attr( $event['title'] ); ?>">
           <div class="event__detail">
             <div class="event__dates">
-              <span><?php echo esc_html( $display_month ); ?> <?php echo esc_html( $display_day ); ?></span>
+              <span><?php echo esc_html( $event['date_text'] ); ?></span>
             </div>
             <div class="event__title"><?php echo esc_html( $event['title'] ); ?></div>
           </div>
@@ -83,5 +136,7 @@ if ( ! empty( $performances ) && is_array( $performances ) ) {
     </div>
   <?php endforeach; ?>
 <?php else : ?>
-  <!-- Tessitura API returned no active events for season <?php echo esc_html( $season_id ); ?> -->
+  <div class="<?php echo esc_attr( $class ); ?>">
+    <p style="color: #fff; padding: 20px;">No upcoming events found.</p>
+  </div>
 <?php endif; ?>
