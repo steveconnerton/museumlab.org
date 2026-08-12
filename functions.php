@@ -33,145 +33,143 @@ foreach ($theme_includes as $file) {
 unset($file, $filepath);
 
 
-/* ==========================================================================
-   Tessitura API - Upcoming Homepage Events Bridge
-   ========================================================================== */
-
-if ( ! function_exists( 'mlab_get_upcoming_tessitura_events' ) ) {
-    function mlab_get_upcoming_tessitura_events() {
-        // 1. Return cached events if transient exists
-        $cached_events = get_transient( 'mlab_homepage_events' );
-        if ( false !== $cached_events && ! empty( $cached_events ) ) {
-            return $cached_events;
-        }
-
-        // 2. Query Tessitura starting from today
-        $today     = date( 'Y-m-d' );
-        $api_url   = 'https://secure.pittsburghkids.org/api/tessitura/perf_summary?PerformanceStartDate=' . $today;
-        $raw_items = array();
-
-        $request = wp_remote_get( $api_url, array( 'timeout' => 15 ) );
-
-        if ( ! is_wp_error( $request ) ) {
-            $body = wp_remote_retrieve_body( $request );
-            $data = json_decode( $body, true );
-
-            if ( is_array( $data ) ) {
-                if ( isset( $data['PerformanceSummary'] ) ) {
-                    $data = $data['PerformanceSummary'];
-                }
-                if ( isset( $data['Id'] ) ) {
-                    $raw_items[] = $data;
-                } else {
-                    $raw_items = $data;
-                }
-            }
-        }
-
-        // Fallback query via WPGetAPI if direct endpoint returned empty
-        if ( empty( $raw_items ) && function_exists( 'wpgetapi_endpoint' ) ) {
-            $response = wpgetapi_endpoint( 'tessitura', 'perf_summary', array( 'query_variables' => 'PerformanceStartDate=' . $today ) );
-            
-            if ( is_array( $response ) && isset( $response['body'] ) ) {
-                $data = is_string( $response['body'] ) ? json_decode( $response['body'], true ) : $response['body'];
-            } else {
-                $data = is_string( $response ) ? json_decode( $response, true ) : $response;
-            }
-
-            if ( is_array( $data ) ) {
-                if ( isset( $data['PerformanceSummary'] ) ) {
-                    $data = $data['PerformanceSummary'];
-                }
-                if ( isset( $data['Id'] ) ) {
-                    $raw_items[] = $data;
-                } else {
-                    $raw_items = (array) $data;
-                }
-            }
-        }
-
-        // 3. Process and Normalise Event Items
-        $events          = array();
-        $placeholder_img = get_stylesheet_directory_uri() . '/assets/images/placeholder.jpg';
-
-        if ( ! empty( $raw_items ) && is_array( $raw_items ) ) {
-            foreach ( $raw_items as $perf ) {
-                if ( ! is_array( $perf ) ) continue;
-
-                $perf_id = isset( $perf['Id'] ) ? $perf['Id'] : '';
-                $prod_id = isset( $perf['ProductionId'] ) ? $perf['ProductionId'] : ( isset( $perf['PackageId'] ) ? $perf['PackageId'] : '0' );
-
-                if ( ! $perf_id ) continue;
-
-                // Title Fallbacks
-                $title = '';
-                if ( ! empty( $perf['Description'] ) ) {
-                    $title = $perf['Description'];
-                } elseif ( ! empty( $perf['Title'] ) ) {
-                    $title = $perf['Title'];
-                } elseif ( ! empty( $perf['Name'] ) ) {
-                    $title = $perf['Name'];
-                } else {
-                    $title = 'Upcoming Workshop';
-                }
-
-                // Date Fallbacks
-                $date_raw = '';
-                if ( ! empty( $perf['PerformanceDateTime'] ) ) {
-                    $date_raw = $perf['PerformanceDateTime'];
-                } elseif ( ! empty( $perf['Date'] ) ) {
-                    $date_raw = $perf['Date'];
-                } elseif ( ! empty( $perf['StartDateTime'] ) ) {
-                    $date_raw = $perf['StartDateTime'];
-                } else {
-                    $date_raw = date( 'Y-m-d' );
-                }
-
-                // Check for Web Content Overrides in WordPress
-                $event_image = '';
-                if ( function_exists( 'mlab_get_web_contents' ) ) {
-                    $web_contents = mlab_get_web_contents( $perf_id );
-
-                    if ( ! empty( $web_contents['title_override'] ) ) {
-                        $title = $web_contents['title_override'];
-                    }
-
-                    if ( ! empty( $web_contents['image'] ) ) {
-                        $event_image = $web_contents['image'];
-                    } elseif ( ! empty( $web_contents['media_url'] ) ) {
-                        $event_image = $web_contents['media_url'];
-                    } elseif ( ! empty( $web_contents['featured_image'] ) ) {
-                        $event_image = $web_contents['featured_image'];
-                    }
-                }
-
-                $link = "https://secure.pittsburghkids.org/" . esc_attr( $prod_id ) . "/" . esc_attr( $perf_id );
-
-                if ( ! isset( $events[ $perf_id ] ) ) {
-                    $events[ $perf_id ] = array(
-                        'id'        => $perf_id,
-                        'title'     => $title,
-                        'date'      => $date_raw,
-                        'timestamp' => strtotime( $date_raw ),
-                        'image'     => ! empty( $event_image ) ? $event_image : $placeholder_img,
-                        'link'      => $link,
-                    );
-                }
-            }
-        }
-
-        // 4. Sort Chronologically Ascending and Store Top 2
-        if ( ! empty( $events ) ) {
-            usort( $events, function( $a, $b ) {
-                return $a['timestamp'] - $b['timestamp'];
-            });
-
-            $events = array_slice( $events, 0, 2 );
-
-            // Cache for 1 hour
-            set_transient( 'mlab_homepage_events', $events, HOUR_IN_SECONDS );
-        }
-
-        return $events;
+/**
+ * Dynamic Tessitura Events Renderer
+ * Fetches upcoming performances, filters for On Sale status (ID = 1),
+ * extracts WebContents image & title override by owner hierarchy, and renders top 2 cards.
+ */
+function render_tessitura_homepage_events() {
+    if ( ! function_exists( 'wpgetapi_endpoint' ) ) {
+        return '<p class="no-events">WPGetAPI is not installed or active.</p>';
     }
+
+    // Step 1: Fetch performances via TXN/Performances
+    $performances = wpgetapi_endpoint( 'tessitura', 'perf_summary', array( 'debug' => false ) );
+
+    if ( empty( $performances ) || ! is_array( $performances ) || isset( $performances['ErrorPath'] ) ) {
+        return '<p class="no-events">No upcoming events found.</p>';
+    }
+
+    $today_timestamp = strtotime( 'today' );
+    $valid_performances = array();
+
+    // Step 2: Filter for upcoming dates & Status = On Sale (Status ID = 1)
+    foreach ( $performances as $perf ) {
+        $raw_date = ! empty( $perf['Date'] ) ? $perf['Date'] : ( $perf['FirstPerformanceDate'] ?? '' );
+        if ( empty( $raw_date ) ) {
+            continue;
+        }
+
+        $perf_time = strtotime( $raw_date );
+        
+        // Ensure event is today or future
+        if ( $perf_time < $today_timestamp ) {
+            continue;
+        }
+
+        // Check Status: Status > ID == 1 or Status > Description == "On Sale"
+        $status_id   = $perf['Status']['Id'] ?? $perf['Status']['ID'] ?? null;
+        $status_desc = strtolower( $perf['Status']['Description'] ?? '' );
+
+        if ( $status_id == 1 || $status_desc === 'on sale' ) {
+            $perf['_timestamp'] = $perf_time;
+            $valid_performances[] = $perf;
+        }
+    }
+
+    if ( empty( $valid_performances ) ) {
+        return '<p class="no-events">No active upcoming events found.</p>';
+    }
+
+    // Sort chronologically ascending (closest upcoming event first)
+    usort( $valid_performances, function( $a, $b ) {
+        return $a['_timestamp'] - $b['_timestamp'];
+    });
+
+    // Take top 2 upcoming events for the homepage
+    $two_events = array_slice( $valid_performances, 0, 2 );
+
+    ob_start();
+    echo '<div class="homepage-tessitura-events-grid">';
+
+    foreach ( $two_events as $event ) {
+        $perf_id = $event['Id'] ?? $event['ID'] ?? '';
+
+        // Default values from Performance object
+        $title = $event['ProductionSeason']['Description'] ?? $event['Description'] ?? 'MuseumLab Event';
+        $image_url = '';
+        $raw_date  = $event['Date'] ?? $event['FirstPerformanceDate'] ?? '';
+        $formatted_date = $raw_date ? date( 'M j', strtotime( $raw_date ) ) : '';
+
+        // Dynamic URL pointing to the specific performance ID
+        $event_url = ! empty( $perf_id ) 
+            ? 'https://secure.pittsburghkids.org/performance/' . esc_attr( $perf_id ) . '?site=mlab'
+            : 'https://secure.pittsburghkids.org/?site=mlab';
+
+        // Step 3: Fetch WebContents for image (ID 134) & title override (ID 132)
+        if ( $perf_id ) {
+            $web_contents = wpgetapi_endpoint( 
+                'tessitura', 
+                'web_contents', 
+                array( 
+                    'debug' => false,
+                    'query_variables' => 'productionElementIds=' . $perf_id . '&contentTypeIds=131,132,134&showAll=true'
+                ) 
+            );
+
+            if ( ! empty( $web_contents ) && is_array( $web_contents ) && ! isset( $web_contents['ErrorPath'] ) ) {
+                $best_image_owner = 999;
+                $best_title_owner = 999;
+
+                foreach ( $web_contents as $content ) {
+                    $type_id    = $content['Type']['Id'] ?? $content['Type']['ID'] ?? null;
+                    $owner_type = $content['Owner']['Type'] ?? 99;
+                    $value      = $content['Value'] ?? '';
+
+                    if ( empty( $value ) ) {
+                        continue;
+                    }
+
+                    // ContentType 134 = Image URL (Prefer lowest Owner Type: 0 > 1 > 2...)
+                    if ( $type_id == 134 && $owner_type < $best_image_owner ) {
+                        $image_url = $value;
+                        $best_image_owner = $owner_type;
+                    }
+
+                    // ContentType 132 = Title Override (Prefer lowest Owner Type: 0 > 1 > 2...)
+                    if ( $type_id == 132 && $owner_type < $best_title_owner ) {
+                        $title = $value;
+                        $best_title_owner = $owner_type;
+                    }
+                }
+            }
+        }
+
+        // Render Card matching homepage layout with dynamic event links
+        ?>
+        <div class="homepage-event-card">
+            <?php if ( ! empty( $image_url ) ) : ?>
+                <div class="homepage-event-image">
+                    <a href="<?php echo esc_url( $event_url ); ?>" target="_blank" rel="noopener noreferrer">
+                        <img src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $title ); ?>" />
+                    </a>
+                </div>
+            <?php endif; ?>
+            <div class="homepage-event-content">
+                <?php if ( $formatted_date ) : ?>
+                    <span class="homepage-event-date"><?php echo esc_html( $formatted_date ); ?></span>
+                <?php endif; ?>
+                <a href="<?php echo esc_url( $event_url ); ?>" class="homepage-event-title-link" target="_blank" rel="noopener noreferrer">
+                    <?php echo esc_html( $title ); ?>
+                </a>
+            </div>
+        </div>
+        <?php
+    }
+
+    echo '</div>';
+
+    return ob_get_clean();
 }
+
+add_shortcode( 'homepage_tessitura_events', 'render_tessitura_homepage_events' );
